@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Dog Image</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color:  orange;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+      animation-delay: 5s;
+      delay: 5s;
+    }
+    #dog-image {
+      margin-top: 20px;
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>Random Dog Image</h1>
+  <button onclick="getRandomDog()">Get Dog Image</button>
+  <div id="image-container">
+
+  </div>
+
+  <script>
+    function getRandomDog() {
+      fetch("https://dog.ceo/api/breeds/image/random")
+        .then(response => response.json())
+        .then(data => {
+          const imageContainer = document.getElementById('image-container');
+          imageContainer.innerHTML = ''; // Clear previous image
+          const img = document.createElement("img");
+          img.src = data.message;
+          img.id = "dog-image";
+          imageContainer.appendChild(img);
+        })
+        .catch(error => console.error("Error fetching the image:", error));
+    }
+  </script>
+</body>
+</html>
